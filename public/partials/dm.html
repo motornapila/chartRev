@@ -1,0 +1,236 @@
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+	<h2>rkdm</h2>
+	<hr>
+	<p>Upišite šifru audita u rubriku šifra. Šifru formirati na sljedeći način:</p>
+	<p>Inicijali imena i prezimena + broj tima + D + 2 cifre za datum + 2 cifre za mjesec + 4 cifrena reprezentacija vremena kreiranja</p>
+	<p>npr. za dr. Ferdinanda Hadžića, čiji je tim 12, i koji kreira audit 17.3. u 9:42 sati šifra bi bila:</p>
+	<p>FH 12 D 1703 0942 - tj. bez razmaka FH12D17030942</p>
+	<p>Šifru nakon toga čuvajte da bi mogli pristupiti rezultatima ili dodati još podataka</p>
+	<hr>
+	<div class="form-group">
+	    <label>Šifra</label>
+	    <input type="text" class="form-control" name="name" ng-model="diabetes.code" style="margin-bottom:10px; width: 50%;">
+	    <button type="button" class="btn btn-primary" ng-click="openModal()">Audit</button>
+	</div>
+
+	<div class="modal fade" id="diabetesM" tabindex="-1" role="dialog" aria-labelledby="survey" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Obrazac za pregled zdravstvenog kartona pacijenta</h4>
+            </div>
+            
+            <div class="modal-body">
+                
+                <!-- input box -->
+                <div class="form-group">
+                    <label>Godina rođenja</label>
+                    <input type="text" class="form-control" name="godiste" ng-model="formData.godiste">
+                </div>
+                
+                <!--radio buttons -->
+                <div>
+                    <label>Spol</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="spol" value="M" ng-model="formData.spol">
+                                Muški
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="spol" value="Ž" ng-model="formData.spol">
+                                Ženski
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                           
+                
+                <!-- toggle choice -->
+                <div>
+                    <label>Porodična anamneza Diabetes Mellitusa</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="porodicna_anamneza" ng-value="true" ng-model="formData.porodicna_anamneza">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="porodicna_anamneza" ng-value="false" ng-model="formData.porodicna_anamneza">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--radio buttons -->
+                <div>
+                    <label>Tip Diabetes Mellitusa</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="tipDM" value="E10" ng-model="formData.tipDM">
+                                E10
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="tipDM" value="E11" ng-model="formData.tipDM">
+                                E11
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="tipDM" value="Drugi" ng-model="formData.tipDM">
+                                Drugi
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- input box -->
+                <div class="form-group">
+                    <label>Broj hospitalizacija u proteklih 12 mjeseci u vezi sa diabetes mellitusom</label>
+                    <input type="text" class="form-control" name="hospitalizacija" ng-model="formData.hospitalizacija">
+                </div>
+
+                <!-- toggle choice -->
+                <div>
+                    <label>U proteklih 12 mjeseci rađen test HbA1C test i registrovan u kartonu</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="hba1c" ng-value="true" ng-model="formData.hba1c">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="hba1c" ng-value="false" ng-model="formData.hba1c">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--radio buttons -->
+                <div ng-show="formData.hba1c">
+                    <label>Ako je rađen, zaokružiti evidentiranu vrijednost HbA1C</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ValHbA1C" value="+7" ng-model="formData.ValHbA1C">
+                                Veća od 7,0%
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ValHbA1C" value="-7" ng-model="formData.ValHbA1C">
+                                Manja od 7,0%
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- toggle choice -->
+                <div>
+                    <label>U protekla 3 mjeseca rađen i registrovan test glukoze u krvi natašte</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="glukoza" ng-value="true" ng-model="formData.glukoza">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="glukoza" ng-value="false" ng-model="formData.glukoza">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--radio buttons -->
+                <div ng-show="formData.glukoza">
+                    <label>Ako je rađen, zaokružiti evidentiranu vrijednost glukoze</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ValGlukoza" value="+7" ng-model="formData.ValGlukoza">
+                                Veća od 7,0 mmol/l
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ValGlukoza" value="-7" ng-model="formData.ValGlukoza">
+                                Manja od 7,0 mmol/l
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- toggle choice -->
+                <div>
+                    <label>U posljednjih 12 mjeseci registrovana tjelesna visina i tezina</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ttv" ng-value="true" ng-model="formData.ttv">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ttv" ng-value="false" ng-model="formData.ttv">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- toggle choice -->
+                <div>
+                    <label>Evidentiran BMI</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="hba1c" ng-value="true" ng-model="formData.bmi">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="hba1c" ng-value="false" ng-model="formData.bmi">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div><!-- /.modal-body -->
+                
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
+                <button type="button" class="btn btn-primary" id="addButton"
+                        data-loading-text="Šaljem..." ng-click="sacuvaj()">Sačuvaj</button>
+          	</div>
+            
+
+            
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+</div>
+</div>
+

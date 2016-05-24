@@ -1,0 +1,39 @@
+<html class="no-js" ng-app="chartRevApp">
+	<head>
+		<meta charset="utf-8">
+		<title>Audit</title>
+		<meta name="description" content="Revizija zdravstvenih kartona">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--CSS-->
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<!-- Scripts -->
+		<!--<script src="./bower_components/modernizr/bin/modernizr"></script>-->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="./bower_components/angular/angular.js"></script>
+		<script src="./bower_components/angular-route/angular-route.js"></script>
+		<!-- Angular Scripts -->
+		<script src="javascripts/app.js"></script>
+		<script src="javascripts/dmCtrl.js"></script>
+		<script src="javascripts/services.js"></script>
+
+
+	</head>
+
+	<body>
+		<div class="container">
+    		<div class="header row">
+    		<h3 class="text-muted">Revizija kartona</h3>
+    		<hr>
+       			<ul class="nav nav-pills pull-left">
+            		<li><a href="/#/diabetes">Diabetes Mellitus</a></li>
+            		<li><a href="/#/hipertenzija">Hipertenzija</a></li>
+        		</ul>
+        	
+    		</div>
+    		<div ng-view></div>
+
+    	</div>
+	</body>
+
+</html>
