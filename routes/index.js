@@ -3,17 +3,27 @@
 var mongoose = require('mongoose');
 var DMAudit = require('../models/DMmodel.js');
 
-/* GET home page. */
-/*router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});*/
-
 module.exports = function(app){
+
+	app.get('/api/audits/:code', function(req, res, next){
+
+		var query = DMAudit.find({
+			auditCode: req.params.code
+		});
+
+		query.exec(function(err, data){
+			if(err)
+				res.send(err);
+
+			res.json(data);
+		});
+	});
+
+
+
 	app.post('/api/audits', function(req, res, next){
 		
 		var newDM = new DMAudit(req.body);
-
-		//console.log(newDM);
 		
 		newDM.save(function(err){
 			if(err)

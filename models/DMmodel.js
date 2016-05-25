@@ -12,6 +12,8 @@ var DMschema = new Schema({
 	ValHbA1C: {type: String},
 	glukoza: {type: Boolean, required: true},
 	ValGlukoza: {type: String},
+	glukoza2: {type: Boolean, required: true},
+	ValGlukoza2: {type: String},
 	ttv: {type: Boolean, required: true},
 	bmi: {type: Boolean, required: true}
 });

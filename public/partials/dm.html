@@ -12,6 +12,7 @@
 	    <label>Šifra</label>
 	    <input type="text" class="form-control" name="name" ng-model="diabetes.code" style="margin-bottom:10px; width: 50%;">
 	    <button type="button" class="btn btn-primary" ng-click="openModal()">Audit</button>
+        <button type="button" class="btn btn-primary" ng-click="openResults()">Rezultati</button>
 	</div>
 
 	<div class="modal fade" id="diabetesM" tabindex="-1" role="dialog" aria-labelledby="survey" aria-hidden="true">
@@ -19,7 +20,7 @@
         <div class="modal-content">
             
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="clear()">&times;</button>
                 <h4 class="modal-title">Obrazac za pregled zdravstvenog kartona pacijenta</h4>
             </div>
             
@@ -180,6 +181,44 @@
 
                 <!-- toggle choice -->
                 <div>
+                    <label>U protekla 3 mjeseca rađen i registrovan test glukoze u krvi 2 sata nakon jela</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="glukoza2" ng-value="true" ng-model="formData.glukoza2">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="glukoza2" ng-value="false" ng-model="formData.glukoza2">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--radio buttons -->
+                <div ng-show="formData.glukoza2">
+                    <label>Ako je rađen, zaokružiti evidentiranu vrijednost glukoze</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ValGlukoza2" value="+11" ng-model="formData.ValGlukoza2">
+                                Veća od 11,1 mmol/l
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ValGlukoza2" value="-11" ng-model="formData.ValGlukoza2">
+                                Manja od 11,1 mmol/l
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- toggle choice -->
+                <div>
                     <label>U posljednjih 12 mjeseci registrovana tjelesna visina i tezina</label>
                     <div class="form-group">
                         <div class="radio">
@@ -220,12 +259,91 @@
             </div><!-- /.modal-body -->
                 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">Zatvori</button>
                 <button type="button" class="btn btn-primary" id="addButton"
                         data-loading-text="Šaljem..." ng-click="sacuvaj()">Sačuvaj</button>
           	</div>
             
 
+            
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="diabetesResults" tabindex="-1" role="dialog" aria-labelledby="dResults" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Zbirni obrazac {{results.broj_kartona}} zdravstvenih kartona pacijenata kojima je dijagnosticiran diabetes mellitus</h4>
+            </div>
+            
+            <div class="modal-body">
+            
+                <table class="table table-striped table-bordered"><thead>
+                <th>RB</th><th>Odabrani pokazatelj</th><th>Vrijednost</th>
+                </thead><tbody>
+                <tr>
+                    <td>1.</td><td>Broj pacijenata ukupno</td><td>{{results.muski + results.zenski}}</td>
+                </tr>
+                <tr>
+                    <td> </td><td>Broj pacijenata muški</td><td>{{results.muski}}</td>
+                </tr>
+                <tr class="novop">
+                    <td> </td><td>Broj pacijenata ženski</td><td>{{results.zenski}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>2.</td><td>Broj pacijenata sa porodičnom anamnezom diabetes mellitusa</td><td>{{results.porodicna_anamneza_dm_poz}}</td>
+                </tr>
+                <tr>
+                    <td>3.</td><td>Broj pacijenata sa dijagnozom (MK10) E10</td><td>{{results.e10}}</td>
+                </tr>
+                <tr>
+                    <td> </td><td>Broj pacijenata sa dijagnozom (MK10) E11</td><td>{{results.e11}}</td>
+                </tr>
+                <tr class="novop">
+                    <td> </td><td>Broj pacijenata sa dijagnozom (MK10) Drugo</td><td>{{results.e_drugo}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>4.</td><td>Broj pacijenata koji su hospitalizirani u proteklih 12 mjeseci u vezi sa diabetes mellitusom</td><td>{{results.hospitalizirani_poz}}</td>
+                </tr>
+                <tr>
+                    <td>5.</td><td>Broj pacijenata kojima je rađen HbA1C u ptoteklih 12 mjeseci</td><td>{{results.hba1c}}</td>
+                </tr>
+                <tr class="novop">
+                    <td> </td><td>Broj pacijenata sa vrijednošću HbA1C većom od 7,0%</td><td>{{results.hba1c_vece_7}}</td>
+                </tr>
+                <tr>
+                    <td>6.</td><td>Broj pacijenata sa registrovanim testom glukoze u krvi natašte u protekla 3 mjeseca</td><td>{{results.glukoza}}</td>
+                </tr>
+                <tr class="novop">
+                    <td> </td><td>Broj pacijenata sa vrijednošću ŠUK većom od 7,0 mmol/l</td><td>{{results.glukoza_vece_7}}</td>
+                </tr>
+                <tr>
+                    <td>7.</td><td>Broj pacijenata sa registrovanim testom glukoze u krvi 2 sata nakon jela</td><td>{{results.glukoza2}}</td>
+                </tr>
+                <tr class="novop">
+                    <td> </td><td>Broj pacijenata sa vrijednošću glukoze u krvi većom od 11,1 mmol/l</td><td>{{results.glukoza2_vece_11}}</td>
+                </tr>
+                <tr>
+                    <td>8.</td><td>Broj pacijenata sa registrovanim tjelesnom težinom i visinom u proteklih 12 mjeseci</td><td>{{results.ttv}}</td>
+                </tr>
+                <tr class="novop">
+                    <td> </td><td>Broj pacijenata sa evidentiranim BMI</td><td>{{results.bmi}}</td>
+                </tr>
+
+                </tbody></table>
+
+            </div><!-- /.modal-body -->
+                
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
+                <button type="button" class="btn btn-primary" id="saveButton"
+                        data-loading-text="Šaljem..." ng-click="savePDF()">Sačuvaj PDF</button>
+                        <button type="button" class="btn btn-primary" id="printButton"
+                        data-loading-text="Šaljem..." ng-click="printPDF()">Štampaj obrazac</button>
+            </div>
             
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

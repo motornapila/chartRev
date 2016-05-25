@@ -6,3 +6,7 @@ body {
 a {
   color: #00B7FF;
 }
+
+tr.novop {
+	border-bottom: 2pt solid black;
+}
