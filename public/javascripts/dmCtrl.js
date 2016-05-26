@@ -9,19 +9,6 @@ var dmCtrl = angular.module('dmCtrl', []);
 			$scope.code_alert = true;
 			$scope.success_alert = true;
 
-			var codeAlert = function(){
-				$scope.code_alert = false;
-			};
-
-			var successAlert = function(){
-				$scope.success_alert = false;
-			};
-
-			var closeAlert = function(){
-				$scope.code_alert = true;
-				$scope.success_alert = true;
-			};
-		
 			$scope.openModal = function(){
 				if($scope.diabetes.code){
 					closeAlert();
@@ -62,6 +49,27 @@ var dmCtrl = angular.module('dmCtrl', []);
 							}
 							if(audit.ttv) { $scope.results.ttv++; }
 							if(audit.bmi) { $scope.results.bmi++; }
+							if(audit.tlak) { 
+								$scope.results.tlak++;
+								if(audit.ValTlak==="+130") { $scope.results.tlak_veci++; }
+							}
+							if(audit.holesterol) { $scope.results.holesterol++; }
+							if(audit.trigliceridi) { $scope.results.trigliceridi++; }
+							if(audit.mikroalb) { $scope.results.mikroalb++; }
+							if(audit.stopalo) { $scope.results.stopalo++; }
+							if(audit.ocno_dno) { $scope.results.ocno_dno++; }
+							if(audit.monofilament) { $scope.results.monofilament++; }
+							if(audit.pusac) { $scope.results.pusac++; }
+							if(audit.pusac_savjetovanje) { $scope.results.pusac_savjetovanje++; }
+							if(audit.alkohol) { $scope.results.alkohol++; }
+							if(audit.edukacija) { $scope.results.edukacija++; }
+							if(audit.samokontrola_glukoze) { $scope.results.samokontrola_glukoze++; }
+							if(audit.posjeta_spec) { $scope.results.posjeta_spec++; }
+							if((audit.oral_a || audit.oral_b || audit.oral_c) && !audit.inzulin) { $scope.results.samo_oral++; }
+							if(!(audit.oral_a || audit.oral_b || audit.oral_c) && audit.inzulin) { $scope.results.inzulin++; }
+							if((audit.oral_a || audit.oral_b || audit.oral_c) && audit.inzulin) { $scope.results.komb_inzulin_oral++; }
+							if(audit.drugo_th) { $scope.results.drugo_th++; }
+							if(audit.kontrola) { $scope.results.kontrola++; }
 
 						});
 
@@ -91,7 +99,29 @@ var dmCtrl = angular.module('dmCtrl', []);
 					glukoza: $scope.formData.glukoza,
 					glukoza2: $scope.formData.glukoza2,
 					ttv: $scope.formData.ttv,
-					bmi: $scope.formData.bmi
+					bmi: $scope.formData.bmi,
+					tlak: $scope.formData.tlak,
+					holesterol: $scope.formData.holesterol,
+					trigliceridi: $scope.formData.trigliceridi,
+					mikroalb: $scope.formData.mikroalb,
+					stopalo: $scope.formData.stopalo,
+					ocno_dno: $scope.formData.ocno_dno,
+					monofilament: $scope.formData.monofilament,
+					pusac: $scope.formData.pusac,
+					alkohol: $scope.formData.alkohol,
+					edukacija: $scope.formData.edukacija,
+					samokontrola_glukoze: $scope.formData.samokontrola_glukoze,
+					posjeta_spec: $scope.formData.posjeta_spec,
+					terapija_ljekar: $scope.formData.terapija_ljekar,
+					oral_a: $scope.formData.oral_a,
+					doza_a: $scope.formData.doza_a,
+					oral_b: $scope.formData.oral_b,
+					doza_b: $scope.formData.doza_b,
+					oral_c: $scope.formData.oral_c,
+					doza_c: $scope.formData.doza_c,
+					inzulin: $scope.formData.inzulin,
+					drugo_th: $scope.formData.drugo_th,
+					kontrola: $scope.formData.kontrola
 				};
 
 				if(postData.hba1c){
@@ -104,6 +134,22 @@ var dmCtrl = angular.module('dmCtrl', []);
 
 				if(postData.glukoza2){
 					postData.ValGlukoza2 = $scope.formData.ValGlukoza2;
+				}
+
+				if(postData.tlak){
+					postData.ValTlak = $scope.formData.ValTlak;
+				}
+
+				if(postData.pusac){
+					postData.pusac_savjetovanje = $scope.formData.pusac_savjetovanje;
+				}
+
+				if(postData.edukacija){
+					postData.edukacija_edukator = $scope.formData.edukacija_edukator;
+				}
+
+				if(postData.posjeta_spec){
+					postData.specijalisti = $scope.formData.specijalisti;
 				}
 
 				//console.log(postData);
@@ -126,6 +172,32 @@ var dmCtrl = angular.module('dmCtrl', []);
 					$scope.formData.bmi = false;
 					$scope.formData.ValHbA1C = "";
 					$scope.formData.ValGlukoza = "";
+					$scope.formData.tlak = false;
+					$scope.formData.holesterol = false;
+					$scope.formData.trigliceridi = false;
+					$scope.formData.mikroalb = false;
+					$scope.formData.stopalo = false;
+					$scope.formData.ocno_dno = false;
+					$scope.formData.monofilament = false;
+					$scope.formData.pusac = false;
+					$scope.formData.alkohol = false;
+					$scope.formData.edukacija = false;
+					$scope.formData.samokontrola_glukoze = false;
+					$scope.formData.posjeta_spec = false;
+					$scope.formData.terapija_ljekar = "";
+					$scope.formData.oral_a = "";
+					$scope.formData.doza_a = "";
+					$scope.formData.oral_b = "";
+					$scope.formData.doza_b = "";
+					$scope.formData.oral_c = "";
+					$scope.formData.doza_c = "";
+					$scope.formData.inzulin = "";
+					$scope.formData.drugo_th = "";
+					$scope.formData.kontrola = false;
+					$scope.formData.ValTlak = "";
+					$scope.formData.pusac_savjetovanje = false;
+					$scope.formData.edukacija_edukator = "";
+					$scope.formData.specijalisti = "";
 			};
 
 			var clearResults = function(){
@@ -145,7 +217,27 @@ var dmCtrl = angular.module('dmCtrl', []);
 					glukoza2: 0,
 					glukoza2_vece_11: 0,
 					ttv: 0,
-					bmi: 0
+					bmi: 0,
+					tlak: 0,
+					holesterol: 0,
+					trigliceridi: 0,
+					mikroalb: 0, 
+					stopalo: 0,
+					ocno_dno: 0,
+					monofilament: 0,
+					pusac: 0,
+					alkohol: 0,
+					edukacija: 0,
+					samokontrola_glukoze: 0,
+					posjeta_spec: 0,
+					terapija_ljekar: 0,
+					samo_oral: 0,
+					inzulin: 0,
+					komb_inzulin_oral: 0,
+					drugo_th: 0,
+					kontrola: 0,
+					tlak_veci: 0,
+					pusac_savjetovanje: 0
 				};
 			}
 
@@ -153,9 +245,18 @@ var dmCtrl = angular.module('dmCtrl', []);
 				//
 			};
 
-			$scope.printPDF = function(){
-				//
+			var codeAlert = function(){
+				$scope.code_alert = false;
 			};
 
+			var successAlert = function(){
+				$scope.success_alert = false;
+			};
+
+			var closeAlert = function(){
+				$scope.code_alert = true;
+				$scope.success_alert = true;
+			};
+		
 			
 	}]);

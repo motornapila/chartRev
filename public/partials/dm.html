@@ -3,15 +3,16 @@
 	<h2>rkdm</h2>
 	<hr>
 	<p>Upišite šifru audita u rubriku šifra. Šifru formirati na sljedeći način:</p>
-	<p>Inicijali imena i prezimena + broj tima + D + 2 cifre za datum + 2 cifre za mjesec + 4 cifrena reprezentacija vremena kreiranja</p>
-	<p>npr. za dr. Ferdinanda Hadžića, čiji je tim 12, i koji kreira audit 17.3. u 9:42 sati šifra bi bila:</p>
-	<p>FH 12 D 1703 0942 - tj. bez razmaka FH12D17030942</p>
+	<p>Inicijali imena i prezimena + broj tima + D (predstavlja diabetes) + 2 cifre za datum + 2 cifre za mjesec + 2 zadnje cifre godine + 4 cifrena reprezentacija vremena kreiranja</p>
+	<p>npr. za dr. Ferdinanda Hadžića, čiji je tim 12, i koji kreira audit 17.3.2016 u 9:42 sati šifra bi bila:</p>
+	<p>FH 12 D 17 03 16 0942 - tj. bez razmaka FH12D1703160942</p>
 	<p>Šifru nakon toga čuvajte da bi mogli pristupiti rezultatima ili dodati još podataka</p>
+    <p>Po završetku revizije šifru dostaviti Službi za kvalitet</p>
 	<hr>
 	<div class="form-group">
         <div class="alert alert-danger" ng-hide="code_alert">Upisati šifru!</div>
 	    <label>Šifra</label>
-	    <input type="text" class="form-control" name="name" ng-model="diabetes.code" style="margin-bottom:10px; width: 50%;">
+	    <input type="text" class="form-control" name="name" ng-model="diabetes.code" style="margin-bottom:10px; width: 50%;" required>
 	    <button type="button" class="btn btn-primary" ng-click="openModal()">Audit</button>
         <button type="button" class="btn btn-primary" ng-click="openResults()">Rezultati</button>
 	</div>
@@ -28,11 +29,12 @@
             <div class="modal-body">
                 <div class="alert alert-success" ng-hide="success_alert">Uspješan unos!</div>
                 <!-- input box -->
+            
                 <div class="form-group">
                     <label>Godina rođenja</label>
                     <input type="text" class="form-control" name="godiste" ng-model="formData.godiste">
                 </div>
-                
+                <hr>
                 <!--radio buttons -->
                 <div>
                     <label>Spol</label>
@@ -53,7 +55,7 @@
                 </div>
                 
                            
-                
+                <hr>
                 <!-- toggle choice -->
                 <div>
                     <label>Porodična anamneza Diabetes Mellitusa</label>
@@ -72,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-
+                <hr>   
                 <!--radio buttons -->
                 <div>
                     <label>Tip Diabetes Mellitusa</label>
@@ -97,13 +99,13 @@
                         </div>
                     </div>
                 </div>
-
-                 <!-- input box -->
+                <hr>
+                <!-- input box -->
                 <div class="form-group">
                     <label>Broj hospitalizacija u proteklih 12 mjeseci u vezi sa diabetes mellitusom</label>
                     <input type="text" class="form-control" name="hospitalizacija" ng-model="formData.hospitalizacija">
                 </div>
-
+                <hr>
                 <!-- toggle choice -->
                 <div>
                     <label>U proteklih 12 mjeseci rađen test HbA1C test i registrovan u kartonu</label>
@@ -141,7 +143,7 @@
                         </div>
                     </div>
                 </div>
-
+                <hr>
                 <!-- toggle choice -->
                 <div>
                     <label>U protekla 3 mjeseca rađen i registrovan test glukoze u krvi natašte</label>
@@ -163,7 +165,7 @@
 
                 <!--radio buttons -->
                 <div ng-show="formData.glukoza">
-                    <label>Ako je rađen, zaokružiti evidentiranu vrijednost glukoze</label>
+                    <label>Ako je rađen, odabrati evidentiranu vrijednost glukoze</label>
                     <div class="form-group">
                         <div class="radio">
                             <label>
@@ -179,7 +181,7 @@
                         </div>
                     </div>
                 </div>
-
+                <hr>
                 <!-- toggle choice -->
                 <div>
                     <label>U protekla 3 mjeseca rađen i registrovan test glukoze u krvi 2 sata nakon jela</label>
@@ -201,7 +203,7 @@
 
                 <!--radio buttons -->
                 <div ng-show="formData.glukoza2">
-                    <label>Ako je rađen, zaokružiti evidentiranu vrijednost glukoze</label>
+                    <label>Ako je rađen, odabrati evidentiranu vrijednost glukoze</label>
                     <div class="form-group">
                         <div class="radio">
                             <label>
@@ -217,7 +219,7 @@
                         </div>
                     </div>
                 </div>
-
+                <hr>
                 <!-- toggle choice -->
                 <div>
                     <label>U posljednjih 12 mjeseci registrovana tjelesna visina i tezina</label>
@@ -255,6 +257,344 @@
                         </div>
                     </div>
                 </div>
+                <hr>
+                 <!-- toggle choice -->
+                <div>
+                    <label>U proteklih 12 mjeseci izmjeren i registrovan krvni pritisak</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="tlak" ng-value="true" ng-model="formData.tlak">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="tlak" ng-value="false" ng-model="formData.tlak">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--radio buttons -->
+                <div ng-show="formData.tlak">
+                    <label>Ako je krvni pritisak izmjeren, da li je</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ValTlak" value="+130" ng-model="formData.ValTlak">
+                                Veći od 130/80 mmHg
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ValTlak" value="-130" ng-model="formData.ValTlak">
+                                Manji od 130/80 mmHg
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <p><strong>U proteklih 12 mjeseci bar jednom je registrovano u zdravstvenom kartonu:</strong></p>
+                <!-- toggle choice -->
+                <div>
+                    <label>a) Vrijednost ukupnog holesterola</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="holesterol" ng-value="true" ng-model="formData.holesterol">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="holesterol" ng-value="false" ng-model="formData.holesterol">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- toggle choice -->
+                <div>
+                    <label>b) Vrijednost triglicerida</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="trigliceridi" ng-value="true" ng-model="formData.trigliceridi">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="trigliceridi" ng-value="false" ng-model="formData.trigliceridi">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- toggle choice -->
+                <div>
+                    <label>c) Analiza urina na mikroalbuminuriju</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="mikroalb" ng-value="true" ng-model="formData.mikroalb">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="mikroalb" ng-value="false" ng-model="formData.mikroalb">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- toggle choice -->
+                <div>
+                    <label>d) Pregled stopala</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="stopalo" ng-value="true" ng-model="formData.stopalo">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="stopalo" ng-value="false" ng-model="formData.stopalo">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- toggle choice -->
+                <div>
+                    <label>e) Pregled očnog dna</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ocno_dno" ng-value="true" ng-model="formData.ocno_dno">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="ocno_dno" ng-value="false" ng-model="formData.ocno_dno">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- toggle choice -->
+                <div>
+                    <label>f) Monofilamentni test</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="monofilament" ng-value="true" ng-model="formData.monofilament">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="monofilament" ng-value="false" ng-model="formData.monofilament">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!-- toggle choice -->
+                <div>
+                    <label>Registrovan pušački status u kartonu</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="pusac" ng-value="true" ng-model="formData.pusac">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="pusac" ng-value="false" ng-model="formData.pusac">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- toggle choice -->
+                <div ng-show="formData.pusac">
+                    <label>Ako je pušač, registrovano savjetovanje o prestanku pušenja</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="pusac_savjetovanje" ng-value="true" ng-model="formData.pusac_savjetovanje">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="pusac_savjetovanje" ng-value="false" ng-model="formData.pusac_savjetovanje">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!-- toggle choice -->
+                <div>
+                    <label>Registrovana konzumacija alkohola u kartonu</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="alkohol" ng-value="true" ng-model="formData.alkohol">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="alkohol" ng-value="false" ng-model="formData.alkohol">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div><hr>
+
+                <!-- toggle choice -->
+                <div>
+                    <label>Registrovana edukacija vezana za diabetes (ishrana, fizička aktivnost, samokontrola glukoze u krvi itd.)</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="edukacija" ng-value="true" ng-model="formData.edukacija">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="edukacija" ng-value="false" ng-model="formData.edukacija">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- input box -->
+                <div class="form-group" ng-show="formData.edukacija">
+                    <label>Ako je DA, navesti ko je obavio edukaciju</label>
+                    <input type="text" class="form-control" name="edukacija_edukator" ng-model="formData.edukacija_edukator">
+                </div>
+                <hr>
+                <!-- toggle choice -->
+                <div>
+                    <label>Registrovani podaci o samokontroli glukoze u krvi</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="samokontrola_glukoze" ng-value="true" ng-model="formData.samokontrola_glukoze">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="samokontrola_glukoze" ng-value="false" ng-model="formData.samokontrola_glukoze">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!-- toggle choice -->
+                <div>
+                    <label>Registrovana posjeta specijalistima u proteklih 12 mjeseci</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="posjeta_spec" ng-value="true" ng-model="formData.posjeta_spec">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="posjeta_spec" ng-value="false" ng-model="formData.posjeta_spec">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- input box -->
+                <div class="form-group" ng-show="formData.posjeta_spec">
+                    <label>Ako je DA, kojim specijalistima</label>
+                    <input type="text" class="form-control" name="specijalisti" ng-model="formData.specijalisti">
+                </div>
+                <hr>
+                <!-- input box -->
+                <div class="form-group">
+                    <label>Ordinirana terapija (navesti ljekara koji je odredio):</label>
+                    <input type="text" class="form-control" name="terapija_ljekar" ng-model="formData.terapija_ljekar">
+                </div>
+
+
+                <!-- input box -->
+                <div class="form-group">
+                    <label>Oralni lijekovi:</label>
+                    <p> </p>
+                    <label for="oral_a">Naziv:</label>
+                    <input type="text" class="form-control" name="oral_a" ng-model="formData.oral_a">
+                    <label for="doza_a">Dnevna doza:</label>
+                    <input type="text" class="form-control" name="doza_a" ng-model="formData.doza_a">
+                    <br/>
+                    <label for="oral_b">Naziv</label>
+                    <input type="text" class="form-control" name="oral_b" ng-model="formData.oral_b">
+                    <label for="doza_b">Dnevna doza:</label>
+                    <input type="text" class="form-control" name="doza_b" ng-model="formData.doza_b">
+                    <br/>
+                    <label for="oral_c">Naziv</label>
+                    <input type="text" class="form-control" name="oral_c" ng-model="formData.oral_c">
+                    <label for="doza_c">Dnevna doza:</label>
+                    <input type="text" class="form-control" name="doza_c" ng-model="formData.doza_c">
+                </div>
+
+               
+                <div class="form-group">
+                    <label class="control-label">Inzulin - dnevna doza</label>
+                    
+                    <input type="text" class="form-control" name="inzulin" ng-model="formData.inzulin">
+                </div>
+
+                <div class="form-group">
+                    <label>Drugo (navesti):</label>
+                    <input type="text" class="form-control" name="drugo_th" ng-model="formData.drugo_th">
+                </div>
+                <hr>
+                <!-- toggle choice -->
+                <div>
+                    <label>Zakazan kontrolni pregled</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="kontrola" ng-value="true" ng-model="formData.kontrola">
+                                DA
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="kontrola" ng-value="false" ng-model="formData.kontrola">
+                                NE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
 
 
             </div><!-- /.modal-body -->
@@ -333,6 +673,68 @@
                 <tr class="novop">
                     <td> </td><td>Broj pacijenata sa evidentiranim BMI</td><td>{{results.bmi}}</td>
                 </tr>
+                <tr>
+                    <td>9.</td><td>Broj pacijenata sa registrovanim krvnim pritiskom u proteklih 12 mjeseci</td><td>{{results.tlak}}</td>
+                </tr>
+                <tr class="novop">
+                    <td> </td><td>Broj pacijenata sa evidentiranim krvnim pritiskom većim od 130/80 mmHg</td><td>{{results.tlak_veci}}</td>
+                </tr>
+
+                <tr>
+                    <td>10.</td><td>Broj pacijenata sa evidencijom u proteklih 12 mjeseci gdje je rađen:</td><td> </td>
+                </tr>
+                <tr>
+                    <td> </td><td>Ukupni holesterol</td><td>{{results.holesterol}}</td>
+                </tr>
+                <tr>
+                    <td> </td><td>Trigliceridi</td><td>{{results.trigliceridi}}</td>
+                </tr>
+                <tr>
+                    <td> </td><td>Analiza urina na mikroalbuminuriju</td><td>{{results.mikroalb}}</td>
+                </tr>
+                <tr>
+                    <td> </td><td>Pregled stopala</td><td>{{results.stopalo}}</td>
+                </tr>
+                <tr>
+                    <td> </td><td>Pregled očnog dna</td><td>{{results.ocno_dno}}</td>
+                </tr>
+                <tr class="novop">
+                    <td> </td><td>Monofilament test</td><td>{{results.monofilament}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>11.</td><td>Broj pacijenata kojima je registrovan pušački status u zdr. kartonu</td><td>{{results.pusac}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>12.</td><td>Broj pacijenata kojima je registrovan savjet o prestanku pušenja</td><td>{{results.pusac_savjetovanje}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>13.</td><td>Broj pacijenata kojima je registrovana konzumacija alkohola</td><td>{{results.alkohol}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>14.</td><td>Broj pacijenata kojima je registrovana edukacija u zdr. kartonu vezana za dijabetes</td><td>{{results.edukacija}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>15.</td><td>Broj pacijenata kojima je registrovana samokontrola glukoze u krvi</td><td>{{results.samokontrola_glukoze}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>16.</td><td>Broj pacijenata kojima je registrovana posjeta specijalistima u proteklih 12 mjeseci</td><td>{{results.posjeta_spec}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>17.</td><td>Broj pacijenata koji su na oralnoj terapiji za diabetes</td><td>{{results.samo_oral}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>18.</td><td>Broj pacijenata koji su na inzulinu</td><td>{{results.inzulin}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>19.</td><td>Broj pacijenata koji se liječe kombinacijom oralnih lijekova i inzulina</td><td>{{results.komb_inzulin_oral}}</td>
+                </tr>
+                <tr class="novop">
+                    <td>20.</td><td>Broj pacijenata koji uzimaju i druge lijekove</td><td>{{results.drugo_th}}</td>
+                </tr>
+                <tr>
+                    <td>21.</td><td>Broj pacijenata kojima je zakazan kontrolni pregled</td><td>{{results.samo_oral}}</td>
+                </tr>
+
 
                 </tbody></table>
 
@@ -342,8 +744,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
                 <button type="button" class="btn btn-primary" id="saveButton"
                         data-loading-text="Šaljem..." ng-click="savePDF()">Sačuvaj PDF</button>
-                        <button type="button" class="btn btn-primary" id="printButton"
-                        data-loading-text="Šaljem..." ng-click="printPDF()">Štampaj obrazac</button>
+                        
             </div>
             
         </div><!-- /.modal-content -->
