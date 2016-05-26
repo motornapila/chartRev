@@ -9,6 +9,7 @@
 	<p>Šifru nakon toga čuvajte da bi mogli pristupiti rezultatima ili dodati još podataka</p>
 	<hr>
 	<div class="form-group">
+        <div class="alert alert-danger" ng-hide="code_alert">Upisati šifru!</div>
 	    <label>Šifra</label>
 	    <input type="text" class="form-control" name="name" ng-model="diabetes.code" style="margin-bottom:10px; width: 50%;">
 	    <button type="button" class="btn btn-primary" ng-click="openModal()">Audit</button>
@@ -25,7 +26,7 @@
             </div>
             
             <div class="modal-body">
-                
+                <div class="alert alert-success" ng-hide="success_alert">Uspješan unos!</div>
                 <!-- input box -->
                 <div class="form-group">
                     <label>Godina rođenja</label>

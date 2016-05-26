@@ -5,15 +5,36 @@ var dmCtrl = angular.module('dmCtrl', []);
 
 			$scope.formData = {};
 			$scope.results 	= {};
+			$scope.diabetes = {};
+			$scope.code_alert = true;
+			$scope.success_alert = true;
+
+			var codeAlert = function(){
+				$scope.code_alert = false;
+			};
+
+			var successAlert = function(){
+				$scope.success_alert = false;
+			};
+
+			var closeAlert = function(){
+				$scope.code_alert = true;
+				$scope.success_alert = true;
+			};
 		
 			$scope.openModal = function(){
 				if($scope.diabetes.code){
+					closeAlert();
 					$("#diabetesM").modal("show");
-				} else { alert("Unijeti šifru!"); }
+				} else { 
+					//alert("Unijeti šifru!"); 
+					codeAlert();
+				}
 			};
 
 			$scope.openResults = function(){
 				if($scope.diabetes.code){
+					closeAlert();
 					clearResults();
 					
 					DMAudits.get($scope.diabetes.code).success(function(data){
@@ -48,7 +69,7 @@ var dmCtrl = angular.module('dmCtrl', []);
 
 					});
 					
-				} else { alert("Unijeti šifru!"); }
+				} else { codeAlert(); }
 			};
 
 			$scope.clear = function(){
@@ -56,7 +77,9 @@ var dmCtrl = angular.module('dmCtrl', []);
 			};
 
 			$scope.sacuvaj = function(){
-			
+				
+				closeAlert();
+
 				postData = {
 					auditCode: $scope.diabetes.code,
 					godiste: $scope.formData.godiste,
@@ -86,6 +109,8 @@ var dmCtrl = angular.module('dmCtrl', []);
 				//console.log(postData);
 				DMAudits.create(postData);
 				clearFields();
+				successAlert();
+				$("#diabetesM").scrollTop(0);
 
 			};
 
