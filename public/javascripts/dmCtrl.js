@@ -241,8 +241,12 @@ var dmCtrl = angular.module('dmCtrl', []);
 				};
 			}
 
-			$scope.savePDF = function(){
-				//
+			$scope.saveCSV = function(){
+				var filename = $scope.diabetes.code + '.csv';
+				var csv = $('#dm-results-table').table2CSV();
+				//alert(csv);
+				var blob = new Blob([csv], { type: "text/csv;charset=utf-8" }); 
+					saveAs(blob, filename);
 			};
 
 			var codeAlert = function(){
