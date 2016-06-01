@@ -3,9 +3,9 @@
 	<h2>rkdm</h2>
 	<hr>
 	<p>Upišite šifru audita u rubriku šifra. Šifru formirati na sljedeći način:</p>
-	<p>Inicijali imena i prezimena + broj tima + D (predstavlja diabetes) + 2 cifre za datum + 2 cifre za mjesec + 2 zadnje cifre godine + 4 cifrena reprezentacija vremena kreiranja</p>
-	<p>npr. za dr. Ferdinanda Hadžića, čiji je tim 12, i koji kreira audit 17.3.2016 u 9:42 sati šifra bi bila:</p>
-	<p>FH 12 D 17 03 16 0942 - tj. bez razmaka FH12D1703160942</p>
+	<p>Broj tima + D (predstavlja diabetes) + inicijali imena i prezimena + 2 cifre za datum + 2 cifre za mjesec + 2 zadnje cifre godine + 4 cifrena reprezentacija vremena kreiranja</p>
+	<p>npr. za dr. Ferdinanda Hadžića, čiji je tim 12, i koji kreira audit za Diabetes dana 17.3.2016 u 9:42 sati šifra bi bila:</p>
+	<p>12 D FH 17 03 16 0942 - tj. bez razmaka 12DFH1703160942</p>
 	<p>Šifru nakon toga čuvajte da bi mogli pristupiti rezultatima ili dodati još podataka</p>
     <p>Po završetku revizije šifru dostaviti Službi za kvalitet</p>
 	<hr>
@@ -32,7 +32,7 @@
             
                 <div class="form-group">
                     <label>Godina rođenja</label>
-                    <input type="text" class="form-control" name="godiste" ng-model="formData.godiste">
+                    <input type="number" class="form-control" name="godiste" ng-model="formData.godiste">
                 </div>
                 <hr>
                 <!--radio buttons -->
@@ -103,7 +103,7 @@
                 <!-- input box -->
                 <div class="form-group">
                     <label>Broj hospitalizacija u proteklih 12 mjeseci u vezi sa diabetes mellitusom</label>
-                    <input type="text" class="form-control" name="hospitalizacija" ng-model="formData.hospitalizacija">
+                    <input type="number" class="form-control" name="hospitalizacija" ng-model="formData.hospitalizacija">
                 </div>
                 <hr>
                 <!-- toggle choice -->
