@@ -10,3 +10,7 @@ a {
 tr.novop {
 	border-bottom: 2pt solid black;
 }
+
+#diabetesM hr {
+	border-top-color: #aaaaaa;
+}
