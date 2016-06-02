@@ -8,6 +8,7 @@ var dmCtrl = angular.module('dmCtrl', []);
 			$scope.diabetes = {};
 			$scope.code_alert = true;
 			$scope.success_alert = true;
+			//$scope.invalid_alert = true;
 
 			$scope.openModal = function(){
 				if($scope.diabetes.code){
@@ -153,9 +154,11 @@ var dmCtrl = angular.module('dmCtrl', []);
 				}
 
 				//console.log(postData);
-				DMAudits.create(postData);
-				clearFields();
-				successAlert();
+				//if(validateForm()){
+					DMAudits.create(postData);
+					clearFields();
+					successAlert();
+				//} else { invalidAlert(); }
 				$("#diabetesM").scrollTop(0);
 
 			};
@@ -257,10 +260,49 @@ var dmCtrl = angular.module('dmCtrl', []);
 				$scope.success_alert = false;
 			};
 
+			/*var invalidAlert = function(){
+				$scope.invalid_alert = false;
+			};*/
+
 			var closeAlert = function(){
 				$scope.code_alert = true;
 				$scope.success_alert = true;
+				//$scope.invalid_alert = true;
 			};
+
+			/*var validateForm = function(){
+
+				$scope.alertDM = [];
+
+
+				if(!$scope.formData.godiste){ $scope.alertDM[0] = true; }
+				if(typeof $scope.formData.spol === "undefined"){ $scope.alertDM[1] = true; }
+				if(typeof $scope.formData.porodicna_anamneza === "undefined"){ $scope.alertDM[2] = true; }
+				if(typeof $scope.formData.tipDM === "undefined"){ $scope.alertDM[3] = true; }
+				if(typeof $scope.formData.hospitalizacija === "undefined"){ $scope.alertDM[4] = true; }
+				if(typeof $scope.formData.hba1c === "undefined"){ $scope.alertDM[5] = true; }
+				if(typeof $scope.formData.glukoza === "undefined"){ $scope.alertDM[6] = true; }
+				if(typeof $scope.formData.glukoza2 === "undefined"){ $scope.alertDM[7] = true; }
+				if(typeof $scope.formData.ttv === "undefined"){ $scope.alertDM[8] = true; }
+				if(typeof $scope.formData.bmi === "undefined"){ $scope.alertDM[9] = true; }
+				if(typeof $scope.formData.tlak === "undefined"){ $scope.alertDM[10] = true; }
+				if(typeof $scope.formData.holesterol === "undefined"){ $scope.alertDM[11] = true; }
+				if(typeof $scope.formData.trigliceridi === "undefined"){ $scope.alertDM[12] = true; }
+				if(typeof $scope.formData.mikroalb === "undefined"){ $scope.alertDM[13] = true; }
+				if(typeof $scope.formData.stopalo === "undefined"){ $scope.alertDM[14] = true; }
+				if(typeof $scope.formData.ocno_dno === "undefined"){ $scope.alertDM[15] = true; }
+				if(typeof $scope.formData.monofilament === "undefined"){ $scope.alertDM[16] = true; }
+				if(typeof $scope.formData.pusac === "undefined"){ $scope.alertDM[17] = true; }
+				if(typeof $scope.formData.alkohol === "undefined"){ $scope.alertDM[18] = true; }
+				if(typeof $scope.formData.edukacija === "undefined"){ $scope.alertDM[19] = true; }
+				if(typeof $scope.formData.samokontrola_glukoze === "undefined"){ $scope.alertDM[20] = true; }
+				if(typeof $scope.formData.posjeta_spec === "undefined"){ $scope.alertDM[21] = true; }
+				if(typeof $scope.formData.kontrola === "undefined"){ $scope.alertDM[22] = true; }
+
+				console.log($scope.alertDM);
+				if ($scope.alertDM.length > 0) { return false; }
+				else { return true; }
+			};*/
 		
 			
 	}]);
