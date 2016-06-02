@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
-var port = 3000;
+var port = process.env.PORT || 3000;
 var methOverride = require('method-override');
 
 
